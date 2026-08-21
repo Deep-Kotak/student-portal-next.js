@@ -1,19 +1,91 @@
-import { notFound } from "next/navigation";
-import { students } from "@/data/students";
+"use client";
 
-export default async function StudentDetail({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 
-  const student = students.find(
-    (student) => student.id === Number(id)
-  );
+type Student = {
+  id: string;
+  name: string;
+  course: string;
+  technology: string;
+  age: number;
+};
+
+export default function StudentDetail() {
+  const params = useParams();
+  const router = useRouter();
+
+  const id = params.id as string;
+
+  const [student, setStudent] = useState<Student | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const [name, setName] = useState("");
+  const [course, setCourse] = useState("");
+  const [technology, setTechnology] = useState("");
+  const [age, setAge] = useState("");
+
+  useEffect(() => {
+    const fetchStudent = async () => {
+      try {
+        const response = await fetch(`/api/students/${id}`);
+
+        if (!response.ok) {
+          setStudent(null);
+          return;
+        }
+
+        const data = await response.json();
+
+        setStudent(data);
+
+        setName(data.name);
+        setCourse(data.course);
+        setTechnology(data.technology);
+        setAge(String(data.age));
+      } catch (error) {
+        console.error("Error fetching student:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStudent();
+  }, [id]);
+
+  const handleUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const response = await fetch(`/api/students/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        course,
+        technology,
+        age: Number(age),
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Student updated successfully!");
+
+      setStudent(data.student);
+    } else {
+      alert(data.message || "Something went wrong");
+    }
+  };
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
 
   if (!student) {
-    notFound();
+    return <h1>Student not found</h1>;
   }
 
   return (
@@ -24,6 +96,74 @@ export default async function StudentDetail({
       <p>Course: {student.course}</p>
       <p>Technology: {student.technology}</p>
       <p>Age: {student.age}</p>
+
+      <hr />
+
+      <h2>Edit Student</h2>
+
+      <form onSubmit={handleUpdate}>
+        <div>
+          <label>Name</label>
+          <br />
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Course</label>
+          <br />
+          <input
+            type="text"
+            value={course}
+            onChange={(e) => setCourse(e.target.value)}
+            required
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Technology</label>
+          <br />
+          <input
+            type="text"
+            value={technology}
+            onChange={(e) => setTechnology(e.target.value)}
+            required
+          />
+        </div>
+
+        <br />
+
+        <div>
+          <label>Age</label>
+          <br />
+          <input
+            type="number"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+            required
+          />
+        </div>
+
+        <br />
+
+        <button type="submit">
+          Update Student
+        </button>
+      </form>
+
+      <br />
+
+      <button onClick={() => router.push("/student")}>
+        Back to Students
+      </button>
     </main>
   );
 }
