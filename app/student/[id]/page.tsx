@@ -25,6 +25,11 @@ export default function StudentDetail() {
   const [technology, setTechnology] = useState("");
   const [age, setAge] = useState("");
 
+  // Update states
+  const [updating, setUpdating] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
   useEffect(() => {
     const fetchStudent = async () => {
       try {
@@ -45,6 +50,7 @@ export default function StudentDetail() {
         setAge(String(data.age));
       } catch (error) {
         console.error("Error fetching student:", error);
+        setError("Unable to load student");
       } finally {
         setLoading(false);
       }
@@ -53,30 +59,42 @@ export default function StudentDetail() {
     fetchStudent();
   }, [id]);
 
+  // Update student
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await fetch(`/api/students/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        course,
-        technology,
-        age: Number(age),
-      }),
-    });
+    setUpdating(true);
+    setMessage("");
+    setError("");
 
-    const data = await response.json();
+    try {
+      const response = await fetch(`/api/students/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          course,
+          technology,
+          age: Number(age),
+        }),
+      });
 
-    if (response.ok) {
-      alert("Student updated successfully!");
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Something went wrong");
+        return;
+      }
 
       setStudent(data.student);
-    } else {
-      alert(data.message || "Something went wrong");
+      setMessage("Student updated successfully!");
+    } catch (error) {
+      console.error("Error updating student:", error);
+      setError("Unable to connect to server");
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -101,10 +119,15 @@ export default function StudentDetail() {
 
       <h2>Edit Student</h2>
 
+      {message && <p>{message}</p>}
+
+      {error && <p>{error}</p>}
+
       <form onSubmit={handleUpdate}>
         <div>
           <label>Name</label>
           <br />
+
           <input
             type="text"
             value={name}
@@ -118,6 +141,7 @@ export default function StudentDetail() {
         <div>
           <label>Course</label>
           <br />
+
           <input
             type="text"
             value={course}
@@ -131,6 +155,7 @@ export default function StudentDetail() {
         <div>
           <label>Technology</label>
           <br />
+
           <input
             type="text"
             value={technology}
@@ -144,18 +169,21 @@ export default function StudentDetail() {
         <div>
           <label>Age</label>
           <br />
+
           <input
             type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
+            min="1"
+            max="100"
             required
           />
         </div>
 
         <br />
 
-        <button type="submit">
-          Update Student
+        <button type="submit" disabled={updating}>
+          {updating ? "Updating..." : "Update Student"}
         </button>
       </form>
 

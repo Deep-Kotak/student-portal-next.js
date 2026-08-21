@@ -42,7 +42,34 @@ export async function PUT(
 
   const body = await request.json();
 
+  if (!body.name || !body.course || !body.technology) {
+    return Response.json(
+      {
+        message: "Name, course and technology are required",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+
+  if (
+    typeof body.age !== "number" ||
+    body.age < 1 ||
+    body.age > 100
+  ) {
+    return Response.json(
+      {
+        message: "Age must be a number between 1 and 100",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+
   const studentRef = doc(db, "students", id);
+
   const studentSnap = await getDoc(studentRef);
 
   if (!studentSnap.exists()) {

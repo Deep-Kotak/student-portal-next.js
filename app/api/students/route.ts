@@ -32,6 +32,21 @@ export async function POST(request: Request) {
     );
   }
 
+  if (
+    typeof body.age !== "number" ||
+    body.age < 1 ||
+    body.age > 100
+  ) {
+    return Response.json(
+      {
+        message: "Age must be a number between 1 and 100",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
+
   const docRef = await addDoc(
     collection(db, "students"),
     {
