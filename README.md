@@ -1,231 +1,191 @@
-🎓 Student Portal
+# 🎓 Student Portal
 
-A modern and responsive Student Management Portal built with Next.js, TypeScript, Firebase Firestore, and Catalyst UI Kit.
+A modern and responsive **Student Management Portal** built with **Next.js, TypeScript, Firebase Firestore, and Catalyst UI Kit**.
 
 The application provides complete CRUD functionality for managing student records through a clean, responsive interface.
 
-🚀 Project Overview
+---
 
-The Student Portal is a full-stack web application built using the Next.js App Router.
+## 🚀 Project Overview
+
+The Student Portal is a full-stack web application built using the **Next.js App Router**.
 
 It allows users to:
 
-Add students
+- Add students
+- View all students
+- View individual student details
+- Update student information
+- Delete students
+- Validate student input
+- Handle loading and empty states
+- Display success and error alerts
+- Confirm deletion with a UI dialog
+- Test APIs using Postman
 
-View all students
+The application uses **Next.js API Routes** as the backend layer and **Firebase Firestore** as the database.
 
-View individual student details
+---
 
-Update student information
+## ✨ Features
 
-Delete students
+### 👨‍🎓 Student Management
 
-Validate student input
+- Add a new student
+- View all students
+- View individual student details
+- Edit student information
+- Delete students
+- Dynamic student detail pages
 
-Handle loading and empty states
+### 🔄 CRUD Operations
 
-Display success and error alerts
+| Operation | HTTP Method | Endpoint | Purpose |
+|---|---|---|---|
+| Create | POST | `/api/students` | Add a student |
+| Read | GET | `/api/students` | Fetch all students |
+| Read Single | GET | `/api/students/:id` | Fetch one student |
+| Update | PUT | `/api/students/:id` | Update a student |
+| Delete | DELETE | `/api/students/:id` | Delete a student |
 
-Confirm deletion with a UI dialog
+---
 
-Test APIs using Postman
+## 🛠️ Technologies Used
 
-The application uses Next.js API Routes as the backend layer and Firebase Firestore as the database.
+### Frontend
 
-✨ Features
+- Next.js 16
+- React
+- TypeScript
+- Tailwind CSS
 
-👨‍🎓 Student Management
+### Backend
 
-Add a new student
+- Next.js API Routes
+- REST API
 
-View all students
+### Database
 
-View individual student details
+- Firebase Firestore
 
-Edit student information
+### UI
 
-Delete students
+- Catalyst UI Kit
+- Headless UI
+- Tailwind CSS
 
-Dynamic student detail pages
+### API Testing
 
-🔄 CRUD Operations
+- Postman
 
-Operation
+### Version Control
 
-HTTP Method
+- Git
+- GitHub
 
-Endpoint
+---
 
-Purpose
+## 🎨 UI Kit
 
-Create
-
-POST
-
-/api/students
-
-Add a student
-
-Read
-
-GET
-
-/api/students
-
-Fetch all students
-
-Read Single
-
-GET
-
-/api/students/:id
-
-Fetch one student
-
-Update
-
-PUT
-
-/api/students/:id
-
-Update a student
-
-Delete
-
-DELETE
-
-/api/students/:id
-
-Delete a student
-
-🛠️ Technologies Used
-
-Frontend
-
-Next.js 16
-
-React
-
-TypeScript
-
-Tailwind CSS
-
-Backend
-
-Next.js API Routes
-
-REST API
-
-Database
-
-Firebase Firestore
-
-UI
-
-Catalyst UI Kit
-
-Headless UI
-
-Tailwind CSS
-
-API Testing
-
-Postman
-
-Version Control
-
-Git
-
-GitHub
-
-🎨 UI Kit
-
-This project uses Catalyst UI Kit for building a reusable and professional user interface.
+This project uses **Catalyst UI Kit** for building a reusable and professional user interface.
 
 Catalyst components used in the project include:
 
-Button
-
-Input
-
-Field
-
-Label
-
-Badge
-
-Dialog
-
-Alert
-
-Heading
-
-Description List
+- Button
+- Input
+- Field
+- Label
+- Badge
+- Dialog
+- Alert
+- Heading
+- Description List
 
 Tailwind CSS was used to customize layouts, spacing, responsiveness, and visual styling.
 
-🔌 API Testing with Postman
+---
 
-The API endpoints were tested using Postman before and during frontend integration.
+## 🔌 API Testing with Postman
 
-GET — All Students
+The API endpoints were tested using **Postman** before and during frontend integration.
 
+### GET — All Students
+
+```http
 GET /api/students
+```
 
 Returns all student records.
 
-GET — Student by ID
+### GET — Student by ID
 
+```http
 GET /api/students/:id
+```
 
 Returns a specific student using the Firebase document ID.
 
-POST — Create Student
+### POST — Create Student
 
+```http
 POST /api/students
 Content-Type: application/json
+```
 
 Example request body:
 
+```json
 {
   "name": "Deep",
   "course": "M.Sc Computer Science",
   "technology": "Next.js",
   "age": 23
 }
+```
 
-PUT — Update Student
+### PUT — Update Student
 
+```http
 PUT /api/students/:id
 Content-Type: application/json
+```
 
 Example request body:
 
+```json
 {
   "name": "Deep Updated",
   "course": "M.Sc Computer Science",
   "technology": "React",
   "age": 24
 }
+```
 
-DELETE — Delete Student
+### DELETE — Delete Student
 
+```http
 DELETE /api/students/:id
+```
 
 Deletes the selected student from Firestore.
 
-🔥 Firebase Firestore
+---
+
+## 🔥 Firebase Firestore
 
 Firebase Firestore is used as the database.
 
 Student records are stored in the:
 
+```text
 students
+```
 
 collection.
 
 Example document:
 
+```json
 {
   "id": "firebase-document-id",
   "name": "Deep",
@@ -233,13 +193,19 @@ Example document:
   "technology": "Next.js",
   "age": 23
 }
+```
 
 Firebase configuration is handled through:
 
+```text
 lib/firebase.ts
+```
 
-📁 Project Structure
+---
 
+## 📁 Project Structure
+
+```text
 myapp/
 │
 ├── app/
@@ -290,9 +256,13 @@ myapp/
 ├── package.json
 ├── package-lock.json
 └── tsconfig.json
+```
 
-🔄 Application Flow
+---
 
+## 🔄 Application Flow
+
+```text
 User
   │
   ▼
@@ -315,41 +285,26 @@ Firebase Firestore
   │
   ▼
 Students Collection
+```
 
-✅ Validation
+---
+
+## ✅ Validation
 
 Basic form validation has been implemented.
 
-Field
-
-Validation
-
-Name
-
-Required
-
-Course
-
-Required
-
-Technology
-
-Required
-
-Age
-
-Required
-
-Age
-
-Minimum 1
-
-Age
-
-Maximum 100
+| Field | Validation |
+|---|---|
+| Name | Required |
+| Course | Required |
+| Technology | Required |
+| Age | Required |
+| Age | Minimum 1 |
+| Age | Maximum 100 |
 
 Examples:
 
+```text
 Age: 0
 ❌ Invalid
 
@@ -358,124 +313,169 @@ Age: 101
 
 Age: 23
 ✅ Valid
+```
 
-💬 User Feedback
+---
+
+## 💬 User Feedback
 
 The application provides success and error feedback using Catalyst Alert components.
 
-Add Student
+### Add Student
 
+```text
 Student added successfully!
+```
 
-Update Student
+### Update Student
 
+```text
 Student updated successfully!
+```
 
-Delete Student
+### Delete Student
 
+```text
 Student deleted successfully!
+```
 
-Error Handling
+### Error Handling
 
+```text
 Unable to connect to server.
+```
 
-🗑️ Delete Confirmation
+---
+
+## 🗑️ Delete Confirmation
 
 Before deleting a student, a Catalyst Dialog asks for confirmation.
 
+```text
 Delete Student
 
 Are you sure you want to delete this student?
 
 [Cancel] [Delete Student]
+```
 
 This helps prevent accidental deletion.
 
-⏳ Loading State
+---
+
+## ⏳ Loading State
 
 While student data is being fetched, a loading spinner is displayed.
 
+```text
 Loading students...
+```
 
-📭 Empty State
+---
+
+## 📭 Empty State
 
 When there are no students in the database, the application displays an empty state:
 
+```text
 No Students Found
 
 There are no students in the database yet.
 Add your first student using the form above.
+```
 
-📱 Responsive Design
+---
+
+## 📱 Responsive Design
 
 The UI is designed to work across:
 
-Desktop
-
-Laptop
-
-Tablet
-
-Mobile
+- Desktop
+- Laptop
+- Tablet
+- Mobile
 
 The student cards use responsive grid layouts:
 
+```text
 Mobile  → 1 column
 Tablet  → 2 columns
 Desktop → 3 columns
+```
 
-🧠 Challenges Faced During Development
+---
 
-1. Firebase Integration
+# 🧠 Challenges Faced During Development
+
+## 1. Firebase Integration
 
 One of the initial challenges was connecting Firebase correctly with the Next.js project.
 
 An error occurred:
 
+```text
 Module not found: Can't resolve 'firebase/app'
+```
 
-Solution
+### Solution
 
 Firebase was installed using:
 
+```bash
 npm install firebase
+```
 
 The installation was then verified using:
 
+```bash
 npm list firebase
+```
 
-2. Understanding Firebase CRUD
+---
+
+## 2. Understanding Firebase CRUD
 
 Understanding Firestore CRUD operations was initially challenging.
 
 The project uses Firestore operations such as:
 
+```text
 addDoc()
 getDocs()
 getDoc()
 updateDoc()
 deleteDoc()
+```
 
 These operations were integrated gradually into the API routes.
 
-3. Dynamic Routing
+---
+
+## 3. Dynamic Routing
 
 The project uses a dynamic route:
 
+```text
 /student/[id]
+```
 
 This allows individual student records to be displayed using their Firebase document ID.
 
 Example:
 
+```text
 /student/NMDU14HwSyR9LSpXCf7T
+```
 
-4. PUT API Integration
+---
+
+## 4. PUT API Integration
 
 Connecting the edit form with the PUT API was another important challenge.
 
 The final flow is:
 
+```text
 Edit Form
     ↓
 PUT Request
@@ -487,19 +487,25 @@ Firebase Firestore
 Updated Student
     ↓
 Updated UI
+```
 
-5. DELETE Confirmation
+---
 
-Initially, deletion used the browser's window.confirm().
+## 5. DELETE Confirmation
+
+Initially, deletion used the browser's `window.confirm()`.
 
 It was later replaced with a Catalyst Dialog to provide a better and more professional user experience.
 
-6. Catalyst UI Kit Integration
+---
+
+## 6. Catalyst UI Kit Integration
 
 Integrating Catalyst UI components into the existing Next.js application required understanding the component structure and dependencies.
 
 Components such as:
 
+```text
 Button
 Input
 Field
@@ -508,191 +514,186 @@ Dialog
 Alert
 Heading
 DescriptionList
+```
 
 were integrated into the project.
 
-7. Loading and Empty States
+---
+
+## 7. Loading and Empty States
 
 The application needed to handle multiple UI states:
 
+```text
 Loading
    ↓
 Students Found
+```
 
 or:
 
+```text
 Loading
    ↓
 No Students Found
+```
 
 Separate UI states were implemented to improve the user experience.
 
-8. Git and GitHub
+---
+
+## 8. Git and GitHub
 
 Git was used to track project changes and maintain the source code on GitHub.
 
 Common commands used:
 
+```bash
 git status
 git add .
 git commit
 git push
+```
 
-📚 What I Learned
+---
+
+# 📚 What I Learned
 
 Through this project, I learned and practiced:
 
-Next.js App Router
+- Next.js App Router
+- React
+- TypeScript
+- Client Components
+- Dynamic Routing
+- Next.js API Routes
+- REST API concepts
+- HTTP methods
+- Firebase Firestore
+- CRUD operations
+- Form handling
+- Form validation
+- Catalyst UI Kit
+- Tailwind CSS
+- Headless UI
+- Postman API testing
+- Git and GitHub
+- Responsive UI development
+- Error handling
+- Loading states
+- Empty states
 
-React
+---
 
-TypeScript
+# 🚀 Getting Started
 
-Client Components
+## 1. Clone the repository
 
-Dynamic Routing
-
-Next.js API Routes
-
-REST API concepts
-
-HTTP methods
-
-Firebase Firestore
-
-CRUD operations
-
-Form handling
-
-Form validation
-
-Catalyst UI Kit
-
-Tailwind CSS
-
-Headless UI
-
-Postman API testing
-
-Git and GitHub
-
-Responsive UI development
-
-Error handling
-
-Loading states
-
-Empty states
-
-🚀 Getting Started
-
-1. Clone the repository
-
+```bash
 git clone <your-github-repository-url>
+```
 
-2. Navigate to the project
+## 2. Navigate to the project
 
+```bash
 cd myapp
+```
 
-3. Install dependencies
+## 3. Install dependencies
 
+```bash
 npm install
+```
 
-4. Configure Firebase
+## 4. Configure Firebase
 
-Create a .env.local file and add your Firebase configuration.
+Create a `.env.local` file and add your Firebase configuration.
 
 Example:
 
+```env
 NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+```
 
-Never commit sensitive credentials or private environment variables to GitHub.
+> Never commit sensitive credentials or private environment variables to GitHub.
 
-5. Start the development server
+## 5. Start the development server
 
+```bash
 npm run dev
+```
 
 Open:
 
+```text
 http://localhost:3000
+```
 
-🧪 Testing
+---
 
-The APIs were tested using Postman.
+# 🧪 Testing
+
+The APIs were tested using **Postman**.
 
 Tested operations:
 
+```text
 GET     → Fetch all students
 GET/:id → Fetch a single student
 POST    → Add a student
 PUT     → Update a student
 DELETE  → Delete a student
+```
 
 Frontend testing included:
 
-Add student
+- Add student
+- View student
+- Update student
+- Delete student
+- Form validation
+- Loading state
+- Empty state
+- Success alerts
+- Error alerts
+- Delete confirmation dialog
+- Responsive layout
 
-View student
+---
 
-Update student
-
-Delete student
-
-Form validation
-
-Loading state
-
-Empty state
-
-Success alerts
-
-Error alerts
-
-Delete confirmation dialog
-
-Responsive layout
-
-🔮 Future Enhancements
+# 🔮 Future Enhancements
 
 Possible future improvements include:
 
-Student search
+- Student search
+- Student filtering
+- Pagination
+- Authentication
+- Role-based access
+- Admin dashboard
+- Student profile images
+- Advanced form validation
+- Student sorting
+- Export student data
+- Firebase Authentication
+- Deployment
+- Analytics dashboard
 
-Student filtering
+---
 
-Pagination
+# 👨‍💻 Author
 
-Authentication
-
-Role-based access
-
-Admin dashboard
-
-Student profile images
-
-Advanced form validation
-
-Student sorting
-
-Export student data
-
-Firebase Authentication
-
-Deployment
-
-Analytics dashboard
-
-👨‍💻 Author
-
-Deep Kotak
+**Deep Kotak**
 
 M.Sc Computer Science
 
-📄 License
+---
+
+## 📄 License
 
 This project was developed for learning, internship practice, and portfolio purposes.
