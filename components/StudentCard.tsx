@@ -12,13 +12,33 @@ export default function StudentCard({
   age,
 }: StudentProps) {
   return (
-    <div>
-      <h2>{name}</h2>
-      <p>Course: {course}</p>
+    <div className="student-card">
+      <div className="student-card-header">
+        <div className="student-avatar">
+          {name.charAt(0).toUpperCase()}
+        </div>
 
-      {technology && <p>Technology: {technology}</p>}
+        <div>
+          <h2>{name}</h2>
+          <p className="student-course">{course}</p>
+        </div>
+      </div>
 
-      {age && <p>Age: {age}</p>}
+      <div className="student-info">
+        {technology && (
+          <div className="student-info-item">
+            <span>Technology</span>
+            <strong>{technology}</strong>
+          </div>
+        )}
+
+        {age !== undefined && (
+          <div className="student-info-item">
+            <span>Age</span>
+            <strong>{age} years</strong>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
